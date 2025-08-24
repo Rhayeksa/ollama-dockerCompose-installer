@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  ollama:
+    image: ollama/ollama:${OLLAMA_VERSION:-latest}
+    container_name: ollama_0_11_6
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    volumes:
+      - ${OLLAMA_DIR:-./}.ollama:/root/.ollama # Menyimpan model dan cache agar tidak hilang
+    # restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices: []
+          # devices:
+          #   - driver: nvidia # Jika ingin pakai GPU NVIDIA
+          #     count: all
+          #     capabilities: [gpu]
